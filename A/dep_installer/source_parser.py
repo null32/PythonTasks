@@ -1,31 +1,4 @@
-#!/usr/bin/env python3
-
 import sys
-import package_checker
-
-def help():
-	print(f"Usage: {sys.argv[0]} <file.py>")
-
-def main():
-	if len(sys.argv) < 2:
-		print("Expected file to parse")
-		help()
-		sys.exit(1)
-	
-	pyFileName = sys.argv[1]
-	#print(f'argvs[1]: "{sys.argv[1]}"')
-	parseAndInstall(pyFileName)
-
-
-def parseAndInstall(pyFileName):
-	hPyFile = open(pyFileName)
-	arrImports = parseFile(hPyFile)
-	hPyFile.close()
-	
-	print(arrImports)
-	for sPackage in arrImports:
-		pType = package_checker.resolvePackage(sPackage)
-		print(f"{sPackage} => {pType}")
 
 def parseFile(hFile):
 	bSkipNext = False
@@ -105,6 +78,3 @@ def skipNonSpaces(s, iIndex):
 		and s[iIndex] != '\\':
 		iIndex = iIndex + 1
 	return iIndex
-
-if __name__ == '__main__':
-	main()
